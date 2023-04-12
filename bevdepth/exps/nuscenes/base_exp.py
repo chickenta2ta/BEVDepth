@@ -20,7 +20,7 @@ from bevdepth.utils.torch_dist import all_gather_object, get_rank, synchronize
 
 H = 900
 W = 1600
-final_dim = (256, 704)
+final_dim = (512, 1408)
 img_conf = dict(img_mean=[123.675, 116.28, 103.53],
                 img_std=[58.395, 57.12, 57.375],
                 to_rgb=True)
@@ -38,19 +38,25 @@ backbone_conf = {
     16,
     'img_backbone_conf':
     dict(
-        type='ResNet',
-        depth=50,
-        frozen_stages=0,
-        out_indices=[0, 1, 2, 3],
-        norm_eval=False,
-        init_cfg=dict(type='Pretrained', checkpoint='torchvision://resnet50'),
+        type='ResNeXt',
+        depth=101,
+        groups=64,
+        base_width=4,
+        num_stages=4,
+        out_indices=(0, 1, 2, 3),
+        frozen_stages=1,
+        norm_cfg=dict(type='BN', requires_grad=True),
+        norm_eval=True,
+        style='pytorch',
+        dcn=dict(type='DCN', deform_groups=1, fallback_on_stride=False),
+        stage_with_dcn=(False, True, True, True),
     ),
     'img_neck_conf':
     dict(
         type='SECONDFPN',
         in_channels=[256, 512, 1024, 2048],
         upsample_strides=[0.25, 0.5, 1, 2],
-        out_channels=[128, 128, 128, 128],
+        out_channels=[256, 256, 256, 256],
     ),
     'depth_net_conf':
     dict(in_channels=512, mid_channels=512)
