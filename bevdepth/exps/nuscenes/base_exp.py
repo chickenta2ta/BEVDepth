@@ -40,14 +40,14 @@ backbone_conf = {
     dict(
         type='ResNeXt',
         depth=101,
-        groups=64,
-        base_width=4,
+        groups=32,
+        base_width=8,
         out_indices=[0, 1, 2, 3],
         style='pytorch',
         frozen_stages=1,
         norm_cfg=dict(type='BN', requires_grad=True),
         norm_eval=True,
-        init_cfg=dict(type='Pretrained', checkpoint='torchvision://resnext101_64x4d')
+        init_cfg=dict(type='Pretrained', checkpoint='torchvision://resnext101_32x8d')
     ),
     'img_neck_conf':
     dict(
