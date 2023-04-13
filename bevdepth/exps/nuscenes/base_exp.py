@@ -42,14 +42,12 @@ backbone_conf = {
         depth=101,
         groups=64,
         base_width=4,
-        num_stages=4,
-        out_indices=(0, 1, 2, 3),
+        out_indices=[0, 1, 2, 3],
+        style='pytorch',
         frozen_stages=1,
         norm_cfg=dict(type='BN', requires_grad=True),
         norm_eval=True,
-        style='pytorch',
-        dcn=dict(type='DCN', deform_groups=1, fallback_on_stride=False),
-        stage_with_dcn=(False, True, True, True),
+        init_cfg=dict(type='pretrained', checkpoint='torchvision://resnext101_64x4d')
     ),
     'img_neck_conf':
     dict(
@@ -59,7 +57,7 @@ backbone_conf = {
         out_channels=[256, 256, 256, 256],
     ),
     'depth_net_conf':
-    dict(in_channels=512, mid_channels=512)
+    dict(in_channels=1024, mid_channels=1024)
 }
 ida_aug_conf = {
     'resize_lim': (0.386, 0.55),
