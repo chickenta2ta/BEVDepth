@@ -15,7 +15,7 @@ class MatrixVT_Exp(BaseExp):
         self.model = MatrixVT_Det(self.backbone_conf,
                                   self.head_conf,
                                   is_train_depth=True)
-        self.data_use_cbgs = True
+        self.data_use_cbgs = False
 
 
 if __name__ == '__main__':
