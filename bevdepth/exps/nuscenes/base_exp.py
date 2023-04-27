@@ -38,14 +38,14 @@ backbone_conf = {
     16,
     'img_backbone_conf':
     dict(
-        type='ConvNeXt',
-        arch='base',
+        type='ResNeXt',
+        depth=101,
+        frozen_stages=0,
         out_indices=[0, 1, 2, 3],
-        drop_path_rate=0.5,
-        gap_before_final_norm=False,
-        init_cfg=dict(
+        norm_eval=False,
+        init_cfg=dift(
             type='Pretrained',
-            checkpoint="https://download.openmmlab.com/mmclassification/v0/convnext/convnext-base_3rdparty_32xb128-noema_in1k_20220222-dba4f95f.pth",
+            checkpoint='torchvision://resnext101_64x4d',
         ),
     ),
     'img_neck_conf':
