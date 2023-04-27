@@ -40,8 +40,10 @@ backbone_conf = {
     dict(
         type='ResNeXt',
         depth=101,
-        frozen_stages=0,
+        groups=32,
+        base_width=8,
         out_indices=[0, 1, 2, 3],
+        frozen_stages=0,
         norm_eval=False,
         init_cfg=dict(
             type='Pretrained',
