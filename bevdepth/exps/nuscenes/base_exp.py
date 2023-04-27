@@ -43,7 +43,7 @@ backbone_conf = {
         frozen_stages=0,
         out_indices=[0, 1, 2, 3],
         norm_eval=False,
-        init_cfg=dift(
+        init_cfg=dict(
             type='Pretrained',
             checkpoint='torchvision://resnext101_64x4d',
         ),
