@@ -45,7 +45,7 @@ backbone_conf = {
         norm_eval=False,
         init_cfg=dict(
             type='Pretrained',
-            checkpoint='torchvision://resnext101_64x4d',
+            checkpoint='torchvision://resnext101_32x8d',
         ),
     ),
     'img_neck_conf':
