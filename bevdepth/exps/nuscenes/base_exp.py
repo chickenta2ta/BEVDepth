@@ -38,26 +38,25 @@ backbone_conf = {
     16,
     'img_backbone_conf':
     dict(
-        type='ResNeXt',
-        depth=101,
-        groups=32,
-        base_width=8,
+        type='ConvNeXt',
+        arch='base',
         out_indices=[0, 1, 2, 3],
-        style='pytorch',
-        frozen_stages=1,
-        norm_cfg=dict(type='BN', requires_grad=True),
-        norm_eval=True,
-        init_cfg=dict(type='Pretrained', checkpoint='torchvision://resnext101_32x8d')
+        drop_path_rate=0.5,
+        gap_before_final_norm=False,
+        init_cfg=dict(
+            type='Pretrained',
+            checkpoint="https://download.openmmlab.com/mmclassification/v0/convnext/convnext-base_3rdparty_32xb128-noema_in1k_20220222-dba4f95f.pth",
+        ),
     ),
     'img_neck_conf':
     dict(
         type='SECONDFPN',
         in_channels=[256, 512, 1024, 2048],
         upsample_strides=[0.25, 0.5, 1, 2],
-        out_channels=[256, 256, 256, 256],
+        out_channels=[128, 128, 128, 128],
     ),
     'depth_net_conf':
-    dict(in_channels=1024, mid_channels=1024)
+    dict(in_channels=512, mid_channels=512)
 }
 ida_aug_conf = {
     'resize_lim': (0.386, 0.55),
